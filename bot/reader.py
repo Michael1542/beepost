@@ -2,6 +2,7 @@
 import praw
 import datetime
 import requests
+import os
 
 class Reader:
     def __init__(self):
@@ -11,6 +12,9 @@ class Reader:
 
     def write_image(self):
         for submission in self.subreddit.top(limit=1):
+            if os.path.isfile("sample_image.jpg"):
+                os.remove("sample_image.jpg")
+
             print("Title: ", submission.title)
             print("Score: ", submission.score)
             print("URL: ", submission.url)
