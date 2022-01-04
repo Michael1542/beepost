@@ -3,6 +3,7 @@ import praw
 import datetime
 import requests
 import os
+from appscript import *
 
 class Reader:
     def __init__(self):
@@ -11,7 +12,7 @@ class Reader:
         self.images = []
 
     def write_image(self):
-        for submission in self.subreddit.top(limit=1):
+        for submission in self.subreddit.hot(limit=1):
             if os.path.isfile("sample_image.jpg"):
                 os.remove("sample_image.jpg")
 
@@ -24,4 +25,7 @@ class Reader:
             file = open("sample_image.jpg", "wb")
             file.write(img_data.content)
             file.close()
+
+            app('Finder').desktop_picture.set(mactypes.File("sample_image.jpg"))
+
 
